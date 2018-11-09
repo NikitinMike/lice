@@ -24,6 +24,7 @@
             <!--<td th:text="${license.tokenCount}"> ...</td>-->
             <!--<td><a href="#" th:text="${license.}">Account ...</a></td>-->
             <!--<td><a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> DELETE </a></td>-->
+            <td><a th:href="'/license/'+${license.id}+'/token/'+${token.getId()}+'/delete'"> DELETE </a></td>
             <td th:text="${token.JWT}"> ...</td>
         </tr>
     </table>

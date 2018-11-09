@@ -26,8 +26,6 @@ public class WelcomeController {
 
     @RequestMapping({"/","home"})
     public String welcome() {
-//        ar.save(new Account("Misha"));
-//        ar.findAll().forEach((a)->System.out.println(a));
         return "index";
     }
 
@@ -47,11 +45,7 @@ public class WelcomeController {
     @RequestMapping("/account/{accountNumber}/licenses/")
     public String licenseView(@PathVariable String accountNumber,Model model) {
         Account account = accountRepositories.findAccountByNumber(accountNumber);
-//        System.out.println("["+account+"]");
-//        licenseRepository.findAll().forEach((l)-> System.out.println(l));
-//        licenseRepository.findAllByAccount(account).forEach((a)->System.out.println(a));
         model.addAttribute("account",accountNumber);
-//        model.addAttribute("licenses",account.getLicenses());
         model.addAttribute("licenses",licenseRepository.findAllByAccount(account));
         return "licenses";
     }
@@ -59,20 +53,14 @@ public class WelcomeController {
     @RequestMapping("/account/{accountNumber}/licenses/new")
     public String license(@PathVariable String accountNumber,Model model) {
         Account account = accountRepositories.findAccountByNumber(accountNumber);
-        License license=new License(account);
-        licenseRepository.save(license);
-//        System.out.println(license.getId());
-//        licenseRepository.findAllByAccount(account).forEach((a)->System.out.println(a));
         model.addAttribute("account",accountNumber);
+        licenseRepository.save(new License(account));
         model.addAttribute("licenses",licenseRepository.findAllByAccount(account));
-//        System.out.println(account.getLicenses());
         return "licenses";
     }
 
     @RequestMapping("/account/{accountNumber}/license/{id}/delete")
     public String licenseDel(@PathVariable String accountNumber,Model model,@PathVariable Long id) {
-//        System.out.println(accountNumber);
-//        System.out.println(id);
         licenseRepository.delete(id);
         return "redirect:/account/"+accountNumber+"/licenses/";
     }
@@ -85,23 +73,23 @@ public class WelcomeController {
     }
 
     @RequestMapping("/license/{id}/tokens")
-//    @ResponseBody
-//    public List<Token> tokens(Model model,@PathVariable Long id) {
+//    @ResponseBody public List<Token> tokens(Model model,@PathVariable Long id) {
     public String tokens(Model model,@PathVariable Long id) {
         License license = licenseRepository.findAllById(id);
         model.addAttribute("license",license);
-//        System.out.println("License:"+id);
         model.addAttribute("tokens",tokens.findAllByLicense(license));
         return "tokens";
     }
 
     @RequestMapping("/license/{id}/newtoken")
     public String tokenNew(Model model,@PathVariable Long id) {
-        License license = licenseRepository.findAllById(id);
-        System.out.println(license);
-        Token token=new Token(license);
-        System.out.println(token);
-        tokens.save(token);
+        tokens.save(new Token(licenseRepository.findAllById(id)));
+        return "redirect:/license/"+id+"/tokens";
+    }
+
+    @RequestMapping("/license/{id}/token/{tokenId}/delete")
+    public String tokenDel(@PathVariable Long id,@PathVariable Long tokenId) {
+        tokens.delete(tokenId);
         return "redirect:/license/"+id+"/tokens";
     }
 

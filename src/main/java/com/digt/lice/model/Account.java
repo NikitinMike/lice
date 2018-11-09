@@ -46,4 +46,8 @@ public class Account extends BaseEntity {
         licenses.remove(license);
         license.setAccount(null);
     }
+
+    public String getUserName() {
+        return userName;
+    }
 }

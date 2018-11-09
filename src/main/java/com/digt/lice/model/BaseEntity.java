@@ -12,4 +12,10 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
+
+    public BaseEntity(){}
+    
+    public Long getId() {
+        return id;
+    }
 }

@@ -30,6 +30,8 @@ public class License extends BaseEntity {
     private int amountTokens;
 //    private int tokenCount = tokens.size();
 
+    public License(){}
+
     public License(int tokens){
 //        this.account=account;
         amountTokens=tokens;
@@ -48,5 +50,13 @@ public class License extends BaseEntity {
     private void removeToken(Token token){
         tokens.remove(token);
 //        token.setLicense(null);
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 }
