@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${license}">Tokens</title>
+</head>
+<body>
+
+    <div th:include="header::header"> HEADER </div>
+
+    <h1 th:text="${license.date}">Tokens</h1>
+
+    <a th:href="'/account/'+${license.account.number}+'/licenses/'"> back </a>
+    <a th:href="'/license/'+${license.id}+'/newtoken'"> new </a>
+
+    <table border="1">
+        <tr th:each="token : ${tokens}">
+            <td th:text="${token.id}">1</td>
+
+            <!--<td><a th:href="'/account/'+${account}+'/licenses/'" th:text="${license.date}">Account ...</a></td>-->
+            <!--<td th:text="${license.date}" >User ...</td>-->
+
+            <td th:text="${token.userName}"> ...</td>
+            <!--<td th:text="${license.tokenCount}"> ...</td>-->
+            <!--<td><a href="#" th:text="${license.}">Account ...</a></td>-->
+            <!--<td><a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> DELETE </a></td>-->
+            <td th:text="${token.JWT}"> ...</td>
+        </tr>
+    </table>
+
+</body>
+</html>

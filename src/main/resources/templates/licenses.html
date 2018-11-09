@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title th:text="${account}">Licenses</title>
+</head>
+<body>
+
+    <div th:include="header::header"> HEADER </div>
+
+    <h1 th:text="${account}">Licenses</h1>
+
+    <a href="/accounts"> back </a>
+    <a href="new"> new </a>
+
+    <table border="1">
+        <tr th:each="license : ${licenses}">
+            <td th:text="${license.id}">1</td>
+
+            <td><a th:href="'/license/'+${license.id}+'/tokens'" th:text="${license.date}"> TOKENS </a></td>
+            <!--<td><a th:href="'/account/'+${account}+'/licenses/'" th:text="${license.date}">Account ...</a></td>-->
+            <!--<td th:text="${license.date}" >User ...</td>-->
+
+            <td><a th:href="'/license/'+${license.id}+'/newtoken'"> NEW TOKEN </a></td>
+            <td th:text="${license.amountTokens}"> ...</td>
+            <!--<td th:text="${license.tokenCount}"> ...</td>-->
+            <!--<td><a href="#" th:text="${license.}">Account ...</a></td>-->
+            <td><a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> DELETE </a></td>
+        </tr>
+    </table>
+
+</body>
+</html>

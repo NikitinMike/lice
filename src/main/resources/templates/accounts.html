@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Accounts</title>
+</head>
+<body>
+
+    <div th:include="header::header"> HEADER </div>
+
+    <h1>Счета</h1>
+    <a href="/"> back </a>
+    <a href="/accounts/new"> new </a>
+    <table border="1">
+        <tr th:each="account : ${accounts}">
+            <td th:text="${account.id}">1</td>
+            <td th:text="${account.getUserName()}">User ...</td>
+            <td><a th:href="'/account/'+${account.number}+'/licenses/'" th:text="${account.number}">Account ...</a></td>
+            <td><a th:href="'/account/'+${account.number}+'/delete'"> DELETE </a></td>
+        </tr>
+    </table>
+
+</body>
+</html>
