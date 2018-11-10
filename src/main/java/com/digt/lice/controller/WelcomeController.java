@@ -26,7 +26,8 @@ public class WelcomeController {
 
     @RequestMapping({"/","home"})
     public String welcome() {
-        return "index";
+//        return "index";
+        return "redirect:/accounts/";
     }
 
     @RequestMapping("/accounts")

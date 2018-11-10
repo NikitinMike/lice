@@ -17,7 +17,7 @@ public class License extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
-//    @JsonBackReference
+    @JsonBackReference
 //    @JsonIgnore
     private Account account;
 

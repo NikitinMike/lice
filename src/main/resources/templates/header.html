@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8"/>
     <title>Homo homini lupus est!</title>
     <link rel="stylesheet" href="style.css"/>
+    <!--<link href='http://fonts.googleapis.com/css?family=Philosopher&subset=cyrillic' rel='stylesheet' type='text/css'>-->
 </head>
 
 <body>
@@ -13,6 +14,46 @@
 <!--<h1></h1>-->
 <div th:fragment="header">
 
+
+    <style type="text/css">
+
+   table {
+    font-family: monospace;
+    font-size: 22pt;
+   }
+   h1 {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+   }
+   h2 {
+    color: red
+   }
+   p {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+   }
+       TABLE {
+        width: 300px; /* Ширина таблицы */
+        background: #fffff0; /* Цвет фона нечетных строк */
+        border: 1px solid #a52a2a; /* Рамка вокруг таблицы */
+        border-collapse: collapse; /* Убираем двойные линии между ячейками */
+       }
+       TD, TH {
+        padding: 3px; /* Поля вокруг содержимого ячейки */
+       }
+       TD {
+        text-align: center; /* Выравнивание по центру */
+        border-bottom: 1px solid #a52a2a; /* Линия внизу ячейки */
+       }
+       TH {
+        background: #a52a2a; /* Цвет фона */
+        color: white; /* Цвет текста */
+       }
+       TR.even {
+        background: #fff8dc; /* Цвет фона четных строк */
+       }
+       .la {
+        text-align: left; /* Выравнивание по левому краю */
+       }
+    </style>
     <a href="/"> HOME </a>
 
 </div>

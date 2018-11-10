@@ -2,18 +2,29 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title th:text="${license}">Tokens</title>
+    <title th:text="${license.account.number}">Tokens</title>
 </head>
 <body>
 
     <div th:include="header::header"> HEADER </div>
 
-    <h1 th:text="${license.date}">Tokens</h1>
+    <h1> Токены, выпущеные по лицензии </h1>
+    <!--<h2 th:text="${license.account.number}">Tokens</h2>-->
+    <h2 th:text="${license.date}">Tokens</h2>
 
     <a th:href="'/account/'+${license.account.number}+'/licenses/'"> back </a>
     <a th:href="'/license/'+${license.id}+'/newtoken'"> new </a>
 
     <table border="1">
+        <thead style="background: #ccc">
+        <tr>
+            <td> ID </td>
+            <td> USER NAME </td>
+            <td>  </td>
+            <td> JWT </td>
+        </tr>
+        </thead>
+        <tbody >
         <tr th:each="token : ${tokens}">
             <td th:text="${token.id}">1</td>
 
@@ -27,6 +38,7 @@
             <td><a th:href="'/license/'+${license.id}+'/token/'+${token.getId()}+'/delete'"> DELETE </a></td>
             <td th:text="${token.JWT}"> ...</td>
         </tr>
+        </tbody>
     </table>
 
 </body>

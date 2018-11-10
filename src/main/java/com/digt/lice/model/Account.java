@@ -27,7 +27,7 @@ public class Account extends BaseEntity {
     private String userName;
 
     @OneToMany (orphanRemoval = true, cascade = CascadeType.ALL) // mappedBy = "account",
-//    @JsonManagedReference
+    @JsonManagedReference
     private List<License> licenses; //
 
     public Account(){}

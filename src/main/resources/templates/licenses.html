@@ -8,25 +8,42 @@
 
     <div th:include="header::header"> HEADER </div>
 
-    <h1 th:text="${account}">Licenses</h1>
+    <h1>Лицензии по счёту</h1>
+    <h2 th:text="${account}">Licenses</h2>
 
     <a href="/accounts"> back </a>
     <a href="new"> new </a>
 
     <table border="1">
+        <thead style="background: #ccc">
+        <tr>
+            <td> ID </td>
+            <td> DATE </td>
+            <td> #TOKENS </td>
+            <td>  </td>
+            <td>  </td>
+        </tr>
+        </thead>
+        <tbody >
         <tr th:each="license : ${licenses}">
             <td th:text="${license.id}">1</td>
 
             <td><a th:href="'/license/'+${license.id}+'/tokens'" th:text="${license.date}"> TOKENS </a></td>
             <!--<td><a th:href="'/account/'+${account}+'/licenses/'" th:text="${license.date}">Account ...</a></td>-->
             <!--<td th:text="${license.date}" >User ...</td>-->
+            <td th:text="${license.amountTokens}"> ...</td>
 
             <td><a th:href="'/license/'+${license.id}+'/newtoken'"> NEW TOKEN </a></td>
-            <td th:text="${license.amountTokens}"> ...</td>
             <!--<td th:text="${license.tokenCount}"> ...</td>-->
             <!--<td><a href="#" th:text="${license.}">Account ...</a></td>-->
-            <td><a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> DELETE </a></td>
+            <td>
+                <a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'" hidden="true"> DELETE </a>
+                <form action="button.html">
+                    <button disabled="true"> DELETE </button>
+                </form>
+            </td>
         </tr>
+        </tbody>
     </table>
 
 </body>
