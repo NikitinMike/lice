@@ -8,39 +8,49 @@
 
     <div th:include="header::header"> HEADER </div>
 
-    <h1>Лицензии по счёту</h1>
-    <h2 th:text="${account}">Licenses</h2>
+    <h1> счёт <span class="haccount" th:text="${account}" ></span> </h1>
+    <h2>Выданые лицензии </h2>
 
-    <a href="/accounts"> back </a>
-    <a href="new"> new </a>
+    <!--<a href="/accounts"> back </a>-->
+    <!--<a href="new"> new </a>-->
+
+    <form action="button.html">
+        <button formaction="/accounts"> СЧЕТА </button>
+        <button formaction="new"> ВЫДАТЬ ЛИЦЕНЗИЮ </button>
+    </form>
 
     <table border="1">
         <thead style="background: #ccc">
         <tr>
-            <td> ID </td>
-            <td> DATE </td>
-            <td> #TOKENS </td>
-            <td>  </td>
-            <td>  </td>
+            <td> Срок Действия Лицензии </td>
+            <td> Доступно </td>
+            <td> Выдано </td>
         </tr>
         </thead>
         <tbody >
         <tr th:each="license : ${licenses}">
-            <td th:text="${license.id}">1</td>
+            <!--<td th:text="${license.id}">1</td>-->
 
-            <td><a th:href="'/license/'+${license.id}+'/tokens'" th:text="${license.date}"> TOKENS </a></td>
+            <td><a th:href="'/license/'+${license.id}+'/tokens'" th:text="${license.getExpire()}"> TOKENS </a></td>
             <!--<td><a th:href="'/account/'+${account}+'/licenses/'" th:text="${license.date}">Account ...</a></td>-->
             <!--<td th:text="${license.date}" >User ...</td>-->
-            <td th:text="${license.amountTokens}"> ...</td>
+            <td th:text="${license.amountTokens-license.getTokens().size()}"> ...</td>
+            <td th:text="${license.getTokens().size()}">1</td>
 
-            <td><a th:href="'/license/'+${license.id}+'/newtoken'"> NEW TOKEN </a></td>
+            <td>
+                <!--<a th:href="'/license/'+${license.id}+'/newtoken'"> NEW TOKEN </a>-->
+                <form action="button.html">
+                    <button th:formaction="'/license/'+${license.id}+'/newtoken'"> NEW TOKEN </button>
+                </form>
+            </td>
             <!--<td th:text="${license.tokenCount}"> ...</td>-->
             <!--<td><a href="#" th:text="${license.}">Account ...</a></td>-->
             <td>
-                <a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'" hidden="true"> DELETE </a>
+                <!--<a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'" > DELETE </a>-->
                 <form action="button.html">
-                    <button disabled="true"> DELETE </button>
+                    <button th:formaction="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> LICENSE DELETE </button>
                 </form>
+                <!--formaction="handler.php"-->
             </td>
         </tr>
         </tbody>

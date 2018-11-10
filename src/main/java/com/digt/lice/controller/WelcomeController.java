@@ -32,8 +32,16 @@ public class WelcomeController {
 
     @RequestMapping("/accounts")
     public String account(Model model) {
+//        accountRepositories.findAll().forEach(a-> System.out.println(a.getLicenses()));
         model.addAttribute("accounts",accountRepositories.findAll());
         return "accounts";
+    }
+
+    @RequestMapping("/accounts/error")
+    public String accountErroe(Model model) {
+//        accountRepositories.findAll().forEach(a-> System.out.println(a.getLicenses()));
+//        model.addAttribute("accounts",accountRepositories.findAll());
+        return "error";
     }
 
     @RequestMapping("/accounts/new")
@@ -55,7 +63,7 @@ public class WelcomeController {
     public String license(@PathVariable String accountNumber,Model model) {
         Account account = accountRepositories.findAccountByNumber(accountNumber);
         model.addAttribute("account",accountNumber);
-        licenseRepository.save(new License(account));
+        licenseRepository.save(account.addLicense(new License((int) (Math.random()*10))));
         model.addAttribute("licenses",licenseRepository.findAllByAccount(account));
         return "licenses";
     }
@@ -69,7 +77,8 @@ public class WelcomeController {
     @RequestMapping("/account/{accountNumber}/delete")
     public String accountDel(@PathVariable String accountNumber,Model model) {
         Account account = accountRepositories.findAccountByNumber(accountNumber);
-        accountRepositories.delete(account.getId());
+        if(account.getLicenses().size()>0) return "redirect:/accounts/error";
+        else accountRepositories.delete(account.getId());
         return "redirect:/accounts/";
     }
 
@@ -77,6 +86,7 @@ public class WelcomeController {
 //    @ResponseBody public List<Token> tokens(Model model,@PathVariable Long id) {
     public String tokens(Model model,@PathVariable Long id) {
         License license = licenseRepository.findAllById(id);
+//        System.out.println(license.getExpire());
         model.addAttribute("license",license);
         model.addAttribute("tokens",tokens.findAllByLicense(license));
         return "tokens";
@@ -84,7 +94,8 @@ public class WelcomeController {
 
     @RequestMapping("/license/{id}/newtoken")
     public String tokenNew(Model model,@PathVariable Long id) {
-        tokens.save(new Token(licenseRepository.findAllById(id)));
+        License license=licenseRepository.findAllById(id);
+        if(license.allowIsuueTokens()) tokens.save(new Token(license));
         return "redirect:/license/"+id+"/tokens";
     }
 

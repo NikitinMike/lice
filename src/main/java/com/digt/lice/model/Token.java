@@ -1,12 +1,9 @@
 package com.digt.lice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Data;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,8 +11,16 @@ import java.util.List;
 import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 
 @Entity
-@Data
+//@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Token extends BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
@@ -28,6 +33,8 @@ public class Token extends BaseEntity {
 
     private String userName;
     private LocalDateTime date = LocalDateTime.now();
+
+//    public Token(){}
 
     public Token(License l){
         license=l;

@@ -1,15 +1,10 @@
 package com.digt.lice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,29 +12,38 @@ import java.util.Set;
 import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 
 @Entity
-@Data
+//@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class Account extends BaseEntity {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @JsonIgnore
+    @OneToMany (mappedBy="account")
+// (fetch = FetchType.EAGER) // ,mappedBy = "account" orphanRemoval = true, cascade = CascadeType.ALL
+//    @JsonManagedReference
+//    private List<License> licenses; //
+    private Set<License> licenses = new HashSet<>(); //
+
     private String number;
     private String userName;
 
-    @OneToMany (orphanRemoval = true, cascade = CascadeType.ALL) // mappedBy = "account",
-    @JsonManagedReference
-    private List<License> licenses; //
-
-    public Account(){}
+//    public Account(){}
 
     public Account(String userName) {
         this.number =  randomAlphanumeric(16).toLowerCase();
         this.userName = userName;
     }
 
-    public void addLicense(License license){
-        licenses.add(license);
+    public License addLicense(License license){
         license.setAccount(this);
+        licenses.add(license);
+        return license;
     }
 
     private void removeLicense(License license){
@@ -50,4 +54,23 @@ public class Account extends BaseEntity {
     public String getUserName() {
         return userName;
     }
+
+    public Set<License> getLicenses() {
+        return licenses;
+    }
+
+    public int getTokens(){
+        int tokens=0;
+        for (License l : licenses)
+            tokens+=l.getTokens().size();
+        return tokens;
+    }
+/*
+    public Set<License> getLicenses() {
+        return licenses;
+    }
+    public void setLicenses(Set<License> licenses) {
+        this.licenses=licenses;
+    }
+    */
 }

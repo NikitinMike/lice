@@ -11,17 +11,20 @@
     <h1> Токены, выпущеные по лицензии </h1>
     <!--<h2 th:text="${license.account.number}">Tokens</h2>-->
     <h2 th:text="${license.date}">Tokens</h2>
+    <h2 th:text="' до '+${license.getExpire()}">Tokens</h2>
 
-    <a th:href="'/account/'+${license.account.number}+'/licenses/'"> back </a>
-    <a th:href="'/license/'+${license.id}+'/newtoken'"> new </a>
+    <form action="button.html">
+        <button th:formaction="'/account/'+${license.account.number}+'/licenses/'"> ЛИЦЕНЗИИ </button>
+        <button th:formaction="'/license/'+${license.id}+'/newtoken'"> ГЕНЕРАЦИЯ ТОКЕНА </button>
+    </form>
 
     <table border="1">
         <thead style="background: #ccc">
         <tr>
-            <td> ID </td>
-            <td> USER NAME </td>
             <td>  </td>
-            <td> JWT </td>
+            <td> ПОЛЬЗОВАТЕЛЬ </td>
+            <td>  </td>
+            <td> ТОКЕН JWT </td>
         </tr>
         </thead>
         <tbody >
@@ -35,7 +38,12 @@
             <!--<td th:text="${license.tokenCount}"> ...</td>-->
             <!--<td><a href="#" th:text="${license.}">Account ...</a></td>-->
             <!--<td><a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> DELETE </a></td>-->
-            <td><a th:href="'/license/'+${license.id}+'/token/'+${token.getId()}+'/delete'"> DELETE </a></td>
+            <!--<td><a th:href="'/license/'+${license.id}+'/token/'+${token.getId()}+'/delete'"> DELETE </a></td>-->
+            <td>
+            <form action="button.html">
+                <button th:formaction="'/license/'+${license.id}+'/token/'+${token.getId()}+'/delete'"> DELETE </button>
+            </form>
+            </td>
             <td th:text="${token.JWT}"> ...</td>
         </tr>
         </tbody>
