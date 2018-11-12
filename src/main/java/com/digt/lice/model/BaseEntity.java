@@ -22,7 +22,7 @@ public abstract class BaseEntity implements Serializable {
 
 //    public BaseEntity(){}
     
-    public Long getId() {
-        return id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
 }
