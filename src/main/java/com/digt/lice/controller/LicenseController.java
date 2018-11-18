@@ -30,9 +30,7 @@ public class LicenseController {
 //    @ResponseBody public List<Token> tokens(Model model,@PathVariable Long id) {
     public String tokens(Model model,@PathVariable Long id) {
         License license = licenseService.get(id);
-//        System.out.println(license);
         model.addAttribute("license",license);
-//        System.out.println(license.getTokens());
         model.addAttribute("tokens",license.getTokens());
         return "tokens";
     }

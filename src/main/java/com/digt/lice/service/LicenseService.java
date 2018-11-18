@@ -35,7 +35,7 @@ public class LicenseService {
     public boolean delete(Long id) {
         License license = get(id);
         if (license == null) return false;
-        if (license.getTokens().size() > 0) return false;
+//        if (license.getTokens().size() > 0) return false;
         licenseRepository.delete(license);
         return true;
     }
