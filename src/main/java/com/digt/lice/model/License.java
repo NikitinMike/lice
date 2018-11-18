@@ -17,7 +17,7 @@ import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class License extends BaseEntity {
+public class License { // extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +58,7 @@ public class License extends BaseEntity {
 
     public License(Account account){
         this.account=account;
-//        amountTokens=9;
+        amountTokens=(int) (Math.random()*10);
     }
 
     private void addToken(Token token){

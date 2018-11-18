@@ -16,7 +16,7 @@
 
     <form action="button.html">
         <button formaction="/accounts"> СЧЕТА </button>
-        <button formaction="new"> ВЫДАТЬ ЛИЦЕНЗИЮ </button>
+        <button th:formaction="'/account/newlicense/'+${account}"> ВЫДАТЬ ЛИЦЕНЗИЮ </button>
     </form>
 
     <!--<table border="1">-->
@@ -49,7 +49,8 @@
             <td>
                 <!--<a th:href="'/account/'+${account}+'/license/'+${license.id}+'/delete'" > DELETE </a>-->
                 <form action="button.html">
-                    <button th:formaction="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> LICENSE DELETE </button>
+                    <!--<button th:formaction="'/account/'+${account}+'/license/'+${license.id}+'/delete'"> LICENSE DELETE </button>-->
+                    <button th:formaction="'/license/'+${license.id}+'/delete'"> LICENSE DELETE </button>
                 </form>
                 <!--formaction="handler.php"-->
             </td>

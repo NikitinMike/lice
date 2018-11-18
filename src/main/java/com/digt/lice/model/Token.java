@@ -16,7 +16,7 @@ import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Token extends BaseEntity {
+public class Token { // extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -17,7 +17,7 @@ import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Account extends BaseEntity {
+public class Account { // extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +31,11 @@ public class Account extends BaseEntity {
     private Set<License> licenses = new HashSet<>(); //
 
     private String number;
+
+    public String getNumber() {
+        return number;
+    }
+
     private String userName;
 
 //    public Account(){}

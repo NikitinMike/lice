@@ -15,7 +15,7 @@
 
     <form action="button.html">
         <!--<button formaction="/"> HOME </button>-->
-        <button formaction="/accounts/new"> НОВЫЙ СЧЁТ </button>
+        <button formaction="/account/new"> НОВЫЙ СЧЁТ </button>
     </form>
 
     <!--<table>-->
@@ -27,26 +27,29 @@
             <td> Счёт </td>
             <td> Лицензий </td>
             <td> Токенов </td>
-            <td>  </td>
+            <td> NEW </td>
+            <td> DEL </td>
         </tr>
         </thead>
         <tbody >
         <tr th:each="account : ${accounts}">
             <!--<td th:text="${account.id}">1</td>-->
             <td th:text="${account.getUserName()}">User ...</td>
-            <td><a th:href="'/account/'+${account.number}+'/licenses/'" th:text="${account.number}">Account ...</a></td>
+            <td><a th:href="'/account/licenses/'+${account.number}" th:text="${account.number}">Account ...</a></td>
             <td th:text="${account.getLicenses().size()}">1</td>
             <td th:text="${account.getTokens()}">1</td>
             <td>
+                <form action="button.html">
+                    <button th:formaction="'/account/newlicense/'+${account.number}"> NEW LICENSE </button>
+                </form>
+            </td>
+            <td>
                 <!--<a th:href="'/account/'+${account.number}+'/delete'" > DELETE </a>-->
                 <!--<form action="button.html"><button disabled="true"> DELETE </button></form>-->
-                    <td>
                     <!--<a th:href="'/license/'+${license.id}+'/newtoken'"> NEW TOKEN </a>-->
-                    <form action="button.html">
-                        <button th:formaction="'/account/'+${account.number}+'/delete'"> DELETE ACCOUNT </button>
-                    </form>
-                </td>
-
+                <form action="button.html">
+                    <button th:formaction="'/account/del/'+${account.number}"> ACCOUNT DELETE </button>
+                </form>
             </td>
         </tr>
         </tbody>

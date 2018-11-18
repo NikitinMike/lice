@@ -11,10 +11,10 @@
     <h1> Токены, выпущеные по лицензии </h1>
     <!--<h2 th:text="${license.account.number}">Tokens</h2>-->
     <h2 th:text="${license.date}">Tokens</h2>
-    <h2 th:text="' до '+${license.getExpire()}">Tokens</h2>
+    <h2 th:text="' действительны до '+${license.getExpire()}">Tokens</h2>
 
     <form action="button.html">
-        <button th:formaction="'/account/'+${license.account.number}+'/licenses/'"> ЛИЦЕНЗИИ </button>
+        <button th:formaction="'/account/licenses/'+${license.account.number}"> ЛИЦЕНЗИИ </button>
         <button th:formaction="'/license/'+${license.id}+'/newtoken'"> ГЕНЕРАЦИЯ ТОКЕНА </button>
     </form>
 
@@ -29,7 +29,7 @@
         </tr>
         </thead>
         <tbody >
-        <tr th:each="token : ${tokens}">
+        <tr th:each="token : ${license.getTokens()}">
             <td th:text="${token.id}">1</td>
 
             <!--<td><a th:href="'/account/'+${account}+'/licenses/'" th:text="${license.date}">Account ...</a></td>-->
