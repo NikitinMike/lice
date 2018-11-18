@@ -18,7 +18,7 @@ public class LicenseService {
 
     public License create(Account account) {
         License license=new License(account);
-        license.setTokensAmount((int) (Math.random()*9));
+//        license.setTokensAmount((int) (Math.random()*9)+1);
         licenseRepository.save(license);
         return license;
     }

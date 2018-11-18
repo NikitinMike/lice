@@ -36,7 +36,7 @@ public class License { // extends BaseEntity {
     private Set<Token> tokens = new HashSet<>();
 
     private LocalDateTime date = LocalDateTime.now();
-    private LocalDateTime expire = date.plusDays((long)(Math.random()*100)); // plusMonths(1);
+    private LocalDateTime expire = date.plusDays((long)(Math.random()*99)+1); // plusMonths(1);
 
     private int amountTokens;
 //    private int tokenCount = tokens.size();
@@ -58,7 +58,7 @@ public class License { // extends BaseEntity {
 
     public License(Account account){
         this.account=account;
-        amountTokens=(int) (Math.random()*10);
+        amountTokens=1+(int) (Math.random()*9);
     }
 
     private void addToken(Token token){
@@ -89,5 +89,9 @@ public class License { // extends BaseEntity {
 
     public void setTokensAmount(int amountTokens) {
         this.amountTokens=amountTokens;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

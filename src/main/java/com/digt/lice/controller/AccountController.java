@@ -56,11 +56,11 @@ public class AccountController {
         Account account = accountService.get(accountNumber);
         model.addAttribute("account",accountNumber);
         License license = accountService.addLicense(account);
-        model.addAttribute("licenses",licenseService.list(account));
+//        model.addAttribute("licenses",licenseService.list(account));
+//        return "licenses";
 //        model.addAttribute("tokens",licenseService.list(account));
 //        return "tokens";
-        return "licenses";
-//        return "redirect:/accounts/";
+        return "redirect:/license/"+license.getId()+"/tokens";
     }
 
     @RequestMapping("/licenses/{accountNumber}")
