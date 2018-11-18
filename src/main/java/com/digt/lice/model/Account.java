@@ -65,6 +65,10 @@ public class Account extends BaseEntity {
             tokens+=l.getTokens().size();
         return tokens;
     }
+
+    public Long getId() {
+        return id;
+    }
 /*
     public Set<License> getLicenses() {
         return licenses;
