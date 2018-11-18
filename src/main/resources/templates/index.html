@@ -2,20 +2,39 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
-    <title>Homo homini lupus est!</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="style.css"/>
+    <title>JWT license generator</title>
+
+    <link rel="stylesheet" th:href="${TRUSTED}+'/static/css/tlogin-3.0.1.css'" />
+    <link rel="stylesheet" th:href="${TRUSTED}+'/static/font/material-icons.css'" />
+    <link rel="stylesheet" th:href="${TRUSTED}+'/static/css/components.css'" />
+    <script src='https://id.trusted.plus/static/js/tlogin-3.0.1.js'> </script>
+
 </head>
 
-<body>
+    <body>
 
-<!--<h1>Homo homini lupus est!</h1>-->
-<h1>HOME</h1>
+        <h1>HOME</h1>
 
-<a href="accounts">ACCOUNT</a>
+        <a href="accounts">ACCOUNT</a>
 
-<!--<div id="container"></div>-->
-<!--<script src="bundle.js"></script>-->
-</body>
+        <!--<div id="container"></div>-->
+        <!--<script src="bundle.js"></script>-->
+
+        <div class="trusted-btn" onClick="TrustedID.login('license_app', 'https://licensesvc.trusted.ru/license/authorize')">
+            Вход Trusted.Login
+        </div>
+
+        <script>
+            window.onfocus = function() {
+                location.replace("/cabinet");
+            };
+        </script>
+
+    </body>
 
 </html>
+
+

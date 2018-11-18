@@ -1,15 +1,16 @@
 package com.digt.lice.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
-import java.time.format.DateTimeFormatter;
-
-import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 
 @Entity
 //@Data
@@ -17,7 +18,7 @@ import static java.time.format.DateTimeFormatter.RFC_1123_DATE_TIME;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class License { // extends BaseEntity {
+public class License {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

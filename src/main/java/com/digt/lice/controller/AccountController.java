@@ -3,7 +3,6 @@ package com.digt.lice.controller;
 
 import com.digt.lice.model.Account;
 import com.digt.lice.model.License;
-import com.digt.lice.repositories.AccountRepository;
 import com.digt.lice.service.AccountService;
 import com.digt.lice.service.LicenseService;
 import lombok.AllArgsConstructor;

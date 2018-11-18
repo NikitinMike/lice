@@ -1,15 +1,18 @@
 package com.digt.lice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-//import org.apache.commons.lang.RandomStringUtils;
+
 import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
+
+//import org.apache.commons.lang.RandomStringUtils;
 
 @Entity
 //@Data
@@ -17,7 +20,7 @@ import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Account { // extends BaseEntity {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

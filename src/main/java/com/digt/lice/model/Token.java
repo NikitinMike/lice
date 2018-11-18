@@ -1,12 +1,13 @@
 package com.digt.lice.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 
@@ -16,7 +17,7 @@ import static org.thymeleaf.util.StringUtils.randomAlphanumeric;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Token { // extends BaseEntity {
+public class Token {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

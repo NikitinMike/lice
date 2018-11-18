@@ -1,39 +1,66 @@
 package com.digt.lice.controller;
 
-import com.digt.lice.model.Account;
-import com.digt.lice.model.License;
-import com.digt.lice.model.Token;
-import com.digt.lice.repositories.AccountRepository;
 import com.digt.lice.repositories.LicenseRepository;
 import com.digt.lice.repositories.TokenRepository;
 import com.digt.lice.service.AccountService;
+import com.digt.lice.service.SecurityService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.logging.Logger;
 
 @Controller
 @AllArgsConstructor
+@NoArgsConstructor
 public class MainController {
 
+    private static final Logger LOG = Logger.getLogger(MainController.class.getName());
+    @Autowired
+    @Value("${debug}") boolean debug;
+    @Autowired
+    @Value("${clientId}") String CLIENT_ID;
+    @Autowired
+    @Value("${license}") String LICENSE;
+    @Autowired
+    @Value("${trusted}") String TRUSTED;
+//    @Autowired SecurityService security;
+
 //    private AccountRepository accountRepositories;
-    private AccountService accountService;
-    private LicenseRepository licenseRepository;
-    private TokenRepository tokens;
+    @Autowired
+    AccountService accountService;
+//    LicenseRepository licenseRepository;
+//    TokenRepository tokens;
 
     @RequestMapping({"/","home"})
-    public String welcome() {
-//        return "index";
-        return "redirect:/accounts/";
+    public String welcome(Authentication auth, Model model) {
+        System.out.println("HOME:"+auth);
+        model.addAttribute("TRUSTED", TRUSTED);
+        model.addAttribute("LICENSE", LICENSE);
+        model.addAttribute("clientId", CLIENT_ID);
+        if (auth!=null) return "redirect:/cabinet";
+        return "index";
+//        return "redirect:/accounts/";
+    }
+
+    @RequestMapping({"/cabinet"})
+    public String cabinet(Authentication auth, Model model) {
+        System.out.println("CABINET:"+auth);
+        model.addAttribute("TRUSTED", TRUSTED);
+        model.addAttribute("LICENSE", LICENSE);
+        model.addAttribute("clientId", CLIENT_ID);
+        if (auth!=null) return "redirect:/accounts/";
+        return "index";
     }
 
     @RequestMapping("/accounts")
-    public String account(Model model) {
+    public String account(Authentication auth, Model model) {
+        System.out.println("ACCOUNTS:"+auth);
 //        accountRepositories.findAll().forEach(a-> System.out.println(a.getLicenses()));
         model.addAttribute("accounts",accountService.list());
         return "accounts";
