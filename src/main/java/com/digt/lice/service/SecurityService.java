@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class SecurityService {
     public boolean checkAuth(HttpServletRequest request) {
-//        return true;
-        return request.getSession().getAttribute("user") != null;
+        return true;
+//        return request.getSession().getAttribute("user") != null;
     }
 }

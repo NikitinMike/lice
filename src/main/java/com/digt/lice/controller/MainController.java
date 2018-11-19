@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.logging.Logger;
 
-@Controller
+//@Controller
 @AllArgsConstructor
 @NoArgsConstructor
 public class MainController {
@@ -40,20 +40,20 @@ public class MainController {
     @RequestMapping({"/","home"})
     public String welcome(Authentication auth, Model model) {
         System.out.println("HOME:"+auth);
-        model.addAttribute("TRUSTED", TRUSTED);
-        model.addAttribute("LICENSE", LICENSE);
-        model.addAttribute("clientId", CLIENT_ID);
+//        model.addAttribute("TRUSTED", TRUSTED);
+//        model.addAttribute("LICENSE", LICENSE);
+//        model.addAttribute("clientId", CLIENT_ID);
         if (auth!=null) return "redirect:/cabinet";
-        return "index";
+        return "login";
 //        return "redirect:/accounts/";
     }
 
     @RequestMapping({"/cabinet"})
     public String cabinet(Authentication auth, Model model) {
         System.out.println("CABINET:"+auth);
-        model.addAttribute("TRUSTED", TRUSTED);
-        model.addAttribute("LICENSE", LICENSE);
-        model.addAttribute("clientId", CLIENT_ID);
+//        model.addAttribute("TRUSTED", TRUSTED);
+//        model.addAttribute("LICENSE", LICENSE);
+//        model.addAttribute("clientId", CLIENT_ID);
         if (auth!=null) return "redirect:/accounts/";
         return "index";
     }
