@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.logging.Logger;
 
-//@Controller
+@Controller
 @AllArgsConstructor
 @NoArgsConstructor
 public class MainController {
@@ -37,7 +37,7 @@ public class MainController {
 //    LicenseRepository licenseRepository;
 //    TokenRepository tokens;
 
-    @RequestMapping({"/","home"})
+//    @RequestMapping({"/","home"})
     public String welcome(Authentication auth, Model model) {
         System.out.println("HOME:"+auth);
 //        model.addAttribute("TRUSTED", TRUSTED);
