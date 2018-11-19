@@ -1,14 +1,13 @@
 package com.digt.lice.controller;
 
-import com.digt.lice.repositories.LicenseRepository;
-import com.digt.lice.repositories.TokenRepository;
 import com.digt.lice.service.AccountService;
-import com.digt.lice.service.SecurityService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,9 +36,11 @@ public class MainController {
 //    LicenseRepository licenseRepository;
 //    TokenRepository tokens;
 
-//    @RequestMapping({"/","home"})
-    public String welcome(Authentication auth, Model model) {
+    @RequestMapping({"/","/home","/login","/hello"})
+    public String welcomeHome(Authentication auth,Model model) {
         System.out.println("HOME:"+auth);
+//        if(auth==null) auth=SecurityContextHolder.getContext().getAuthentication();
+//        System.out.println(SecurityContextHolder.getContext());
 //        model.addAttribute("TRUSTED", TRUSTED);
 //        model.addAttribute("LICENSE", LICENSE);
 //        model.addAttribute("clientId", CLIENT_ID);
@@ -49,18 +50,21 @@ public class MainController {
     }
 
     @RequestMapping({"/cabinet"})
-    public String cabinet(Authentication auth, Model model) {
+    public String cabinet(Authentication auth,Model model) {
         System.out.println("CABINET:"+auth);
+//        System.out.println(SecurityContextHolder.getContext());
 //        model.addAttribute("TRUSTED", TRUSTED);
 //        model.addAttribute("LICENSE", LICENSE);
 //        model.addAttribute("clientId", CLIENT_ID);
         if (auth!=null) return "redirect:/accounts/";
+        if(auth==null) auth=SecurityContextHolder.getContext().getAuthentication();
         return "index";
     }
 
     @RequestMapping("/accounts")
     public String account(Authentication auth, Model model) {
         System.out.println("ACCOUNTS:"+auth);
+        System.out.println(SecurityContextHolder.getContext());
 //        accountRepositories.findAll().forEach(a-> System.out.println(a.getLicenses()));
         model.addAttribute("accounts",accountService.list());
         return "accounts";

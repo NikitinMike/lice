@@ -146,10 +146,16 @@
     </style>
     <!--<a href="/"> HOME </a>-->
 
-    <form>
-        <button formaction="/"><img src="https://4.bp.blogspot.com/-YwUZ3EJzeiM/VUY43fWwGVI/AAAAAAAAAa8/oUNXan-xMFw/s1600/Home-Button.png"
-                                    width="64" height="64" alt="HOME"/>
+    <form th:action="@{/logout}" method="post">
+        <button formaction="/">
+            <img width="64" height="64" alt="HOME"
+                src="https://4.bp.blogspot.com/-YwUZ3EJzeiM/VUY43fWwGVI/AAAAAAAAAa8/oUNXan-xMFw/s1600/Home-Button.png"/>
         </button>
+        <button th:action="@{/logout}">
+            <img width="64" height="64" alt="HOME"
+                 src="https://techuntold-techuntold.netdna-ssl.com/wp-content/uploads/2015/05/log-out-of-all-accounts-featured.png?x42167"/>
+        </button>
+        <input type="submit" value="Out" hidden="true"/>
     </form>
 
 </div>
