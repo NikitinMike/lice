@@ -18,18 +18,20 @@ import java.util.logging.Logger;
 @Controller
 @AllArgsConstructor
 @NoArgsConstructor
+//@RequestMapping(value = "/license")
 public class MainController {
 
     private static final Logger LOG = Logger.getLogger(MainController.class.getName());
-    @Autowired
+//    @Autowired
     @Value("${debug}") boolean debug;
-    @Autowired
+//    @Autowired
     @Value("${clientId}") String CLIENT_ID;
-    @Autowired
+//    @Autowired
     @Value("${license}") String LICENSE;
-    @Autowired
+//    @Autowired
     @Value("${trusted}") String TRUSTED;
-//    @Autowired SecurityService security;
+//    @Autowired
+    SecurityService security;
 
 //    private AccountRepository accountRepositories;
     @Autowired
@@ -43,22 +45,28 @@ public class MainController {
         model.addAttribute("TRUSTED", TRUSTED);
         model.addAttribute("LICENSE", LICENSE);
         model.addAttribute("clientId", CLIENT_ID);
-        if (auth!=null) return "redirect:/cabinet";
+        if (auth!=null) return "redirect:cabinet";
         return "index";
 //        return "redirect:/accounts/";
     }
 
-    @RequestMapping({"/cabinet"})
+    @RequestMapping({"cabinet"})
     public String cabinet(Authentication auth, Model model) {
         System.out.println("CABINET:"+auth);
         model.addAttribute("TRUSTED", TRUSTED);
         model.addAttribute("LICENSE", LICENSE);
         model.addAttribute("clientId", CLIENT_ID);
-        if (auth!=null) return "redirect:/accounts/";
-        return "index";
+        if (auth!=null) return "redirect:accounts";
+        return "cabinet";
     }
 
-    @RequestMapping("/accounts")
+    @RequestMapping({"/authorize","/login"})
+    public String login(Authentication auth, Model model) {
+        System.out.println("LOGIN");
+        return "login";
+    }
+
+    @RequestMapping("accounts")
     public String account(Authentication auth, Model model) {
         System.out.println("ACCOUNTS:"+auth);
 //        accountRepositories.findAll().forEach(a-> System.out.println(a.getLicenses()));
@@ -66,7 +74,7 @@ public class MainController {
         return "accounts";
     }
 
-    @RequestMapping("/accounts/error")
+    @RequestMapping("accounts/error")
     public String accountErroe(Model model) {
 //        accountRepositories.findAll().forEach(a-> System.out.println(a.getLicenses()));
 //        model.addAttribute("accounts",accountRepositories.findAll());
